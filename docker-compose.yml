@@ -44,6 +44,16 @@ services:
     env_file:
       - ./hadoop.env
 
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    ports:
+      - "9042:9042" # Cổng để Python/DBeaver kết nối vào
+    volumes:
+      - ./cassandra_data:/var/lib/cassandra # Lưu dữ liệu ra máy Windows để không bị mất
+    environment:
+      - CASSANDRA_CLUSTER_NAME=Bro_Cluster
+
   spark-master:
     image: apache/spark:3.5.1
     container_name: spark-master
